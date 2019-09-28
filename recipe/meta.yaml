@@ -1,4 +1,4 @@
-{% set version = '1.4.1' %}
+{% set version = '1.5.0' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,18 +10,18 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/pbmcapply_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/pbmcapply/pbmcapply_{{ version }}.tar.gz
-  sha256: aa19eeb458f5204cddc88757f71c165ee14b0b5868d20b9b7bac52215b7e7318
+  sha256: df52ed585c0b32ac6180616efd94cd75dd7c5621f5398c0861db2f7b317ba844
 
 build:
   merge_build_host: True  # [win]
-  number: 1
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('c') }}              # [not win]
     - {{ compiler('m2w64_c') }}        # [win]
     - {{posix}}filesystem        # [win]
     - {{posix}}make
@@ -47,7 +47,9 @@ about:
     *nix (Linux, Unix such as macOS) system due to the lack of fork() functionality,
     which is essential for mc*apply, on Windows.
   license_family: MIT
-  license_file: LICENSE.txt
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/MIT'
+    - LICENSE
 
 extra:
   recipe-maintainers:
@@ -57,7 +59,7 @@ extra:
 # Package: pbmcapply
 # Type: Package
 # Title: Tracking the Progress of Mc*pply with Progress Bar
-# Version: 1.4.1
+# Version: 1.5.0
 # Author: Kevin Kuang (aut), Quyu Kong (ctb), Francesco Napolitano (ctb)
 # Maintainer: Kevin kuang <kvn.kuang@mail.utoronto.ca>
 # Description: A light-weight package helps you track and visualize the progress of parallel version of vectorized R functions (mc*apply). Parallelization (mc.core > 1) works only on *nix (Linux, Unix such as macOS) system due to the lack of fork() functionality, which is essential for mc*apply, on Windows.
@@ -69,6 +71,6 @@ extra:
 # RoxygenNote: 6.1.1
 # Encoding: UTF-8
 # NeedsCompilation: yes
-# Packaged: 2019-04-01 17:18:05 UTC; kevin
+# Packaged: 2019-07-10 20:29:50 UTC; kevin
 # Repository: CRAN
-# Date/Publication: 2019-04-01 17:40:03 UTC
+# Date/Publication: 2019-07-10 21:05:08 UTC
